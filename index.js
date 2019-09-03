@@ -1,5 +1,6 @@
 var student = require("./student")
 var input = require("readline-sync")
+var list=  []
 var http = require("http")
 
 var jorge = new student();
@@ -11,8 +12,15 @@ do {
     jorge.addCourse(input.question("\tCourse : "),input.question("\tYear : "))
     console.log("Add Schedule :")
     jorge.addSchedule(input.question("\tDay : "),input.question("\tTime : "))
+            //arrays
+    list.push(jorge)
+    console.log(list)
 } while (input.question("exit? : ")!= "yes");
     console.log("Successfully Added data!")
+
+    //arrays
+list.push(jorge)
+console.log(list)
     //creating a server
 http.createServer(function(request , response){
     console.log("server started!")
