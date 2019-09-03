@@ -1,8 +1,5 @@
 var student = require("./student")
 var input = require("readline-sync")
-var list=  []
-var student = require("./student")
-var input = require("readline-sync")
 //var toArray=  require("to-array")
 const deepcopy = require('deepcopy')
 var http = require("http")
@@ -17,12 +14,13 @@ do {
     jorge.addCourse(input.question("\tCourse : "),input.question("\tYear : "))
     console.log("Add Schedule :")
     jorge.addSchedule(input.question("\tDay : "),input.question("\tTime : "))
+    list.push(jorge)
 } while (input.question("exit? : ")!= "yes");
     console.log("Successfully Added data!\n")
     //to view the data
     if(input.question("Wanna view the Data Added? ")!="no\n"){
     //arrays
-    list.push(jorge)
+    // list.push(jorge)
     console.log(list)
     // list.push(jorge);
     // list.toArray();
@@ -35,4 +33,5 @@ http.createServer(function(request , response){
     response.write()//start the response
     response.end()//end the sever response
 }).listen(8000)
+
 
