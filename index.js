@@ -19,8 +19,8 @@ do {
     console.log("Successfully Added data!")
 
     //arrays
-list.push(jorge)
-console.log(list)
+// list.push(jorge)
+// console.log(list)
     //creating a server
 http.createServer(function(request , response){
     console.log("server started!")
