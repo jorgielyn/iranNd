@@ -1,37 +1,66 @@
-var student = require("./student")
-var input = require("readline-sync")
-//var toArray=  require("to-array")
-const deepcopy = require('deepcopy')
-var http = require("http")
-var list = []
-var jorge = new student();
-//the program runs until "YES" is inputed!
-do{
-do {
-    console.log("Add Student : ")
-    jorge.setName(input.question("\tName : "))
-    console.log("Add Course : ")
-    jorge.addCourse(input.question("\tCourse : "),input.question("\tYear : "))
-    console.log("Add Schedule :")
-    jorge.addSchedule(input.question("\tDay : "),input.question("\tTime : "))
-    list.push(jorge)
-} while (input.question("exit? : ")!= "yes");
-    console.log("Successfully Added data!\n")
-    //to view the data
-    if(input.question("Wanna view the Data Added? ")!="no\n"){
-    //arrays
-    // list.push(jorge)
-    console.log(list)
-    // list.push(jorge);
-    // list.toArray();
-    }else("Thank You! \t Come again!")
-} while(input.question("exit? : ")!="yes");
-    console.log("Thank You!")
-    //creating a server
+var student =  require('./student')
+var readLine = require("readline-sync")
+var http = require('http')
+var list = [] 
+var count = 0
+var studentNum = 0
+var Studentid = 0
+
+
+function addStudent(){    
+    let student1 = new student()
+    student1.setName(readLine.question('\tName: '))
+    student1.setCourse(readLine.question('\tCourse: '))
+    student1.setYear(readLine.question('\tYear: '))
+    Studentid++
+    student1.id = Studentid
+    list.push(student1)
+}
+
+function viewlist(){
+    for(let i =0 ; i< list.length; i++){
+        console.log("student "+ (i+1) + ":" + list[i].getName())
+    }
+}
+function deleteStudent(){
+    var input1 = readLine.question("Enter ID to delete student \n")
+    for(let i = 0 ; i < list.length+1; i++){
+        if(input1 == i){
+            var index = i-1      
+            list.splice(index , 1)
+            viewlist()
+        }
+    }   
+}
+
+while(true){
+
+    var input1 = readLine.question("\nDo you want to add Information?")
+    if(input1 == "yes"){
+        console.log("\nADD STUDENT :")
+        addStudent()
+        while(count!= 3){
+            list[studentNum].addSched(readLine.question('Add Schedule: '))
+            count++
+        }
+        list[studentNum].deleteSched()
+    } 
+    studentNum++ 
+    count =0;
+    if(input1 == "no"){
+        for(let i = 0; i<list.length ; i++){
+            list[i].displayinfo()
+        }
+        console.log("=======LIST=======")
+        viewlist()
+        deleteStudent()
+        break
+    }
+    
+    continue
+}
 http.createServer(function(request , response){
     console.log("server started!")
     response.write()//start the response
     response.end()//end the sever response
-}).listen(8000)
-
-
+}).listen(1400)
